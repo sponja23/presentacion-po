@@ -1,0 +1,54 @@
+
+\mode<presentation>
+{
+\usetheme{Darmstadt}
+%\setbeamercovered{transparent}
+}
+\setbeamertemplate{navigation symbols}{}
+\usefonttheme[onlymath]{serif}
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+% \AtBeginSection[]
+% {
+%  \begin{frame}<beamer>{Outline}
+%    \tableofcontents[currentsection,currentsubsection]
+%  \end{frame}
+% }
+
+\usepackage{array}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+% \usepackage{subfigure}
+\usepackage{amsmath,amsfonts}
+\usepackage{textcomp}
+\usepackage{enumerate}
+\usepackage{courier}
+\usepackage{listings}
+\usepackage{helvet}
+\usepackage{framed}
+\usepackage{url}
+\usepackage{parskip}
+\usepackage{mdwlist} % Listas compactas
+
+\graphicspath{
+{img/}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\author{}
+\institute[Exactas-UBA]% (optional, but mostly needed)
+{Facultad de Ciencias Exactas y Naturales, UBA}
+\date{}
+
+\lstset{language=Python,basicstyle=\ttfamily\small,breaklines=true,
+    keepspaces=true,
+    upquote=true,                   %  para comillas simples
+    showstringspaces=false,         % underline spaces within strings only
+    showtabs=false                  % show tabs within strings adding particular
+}
+
+\newcommand\encolor[1]{{\usebeamercolor[fg]{title} #1}}
