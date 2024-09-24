@@ -1,15 +1,48 @@
-\documentclass[9pt]{beamer}
+\documentclass[8pt]{beamer}
 
 \usepackage{commonslides}
+\usepackage[compatibility=false]{caption}
+\usepackage{minted}
 
-\title{Presentación Prueba de Oposición}
+\title{Presentación para Prueba de Oposición}
+\subtitle{Paradigmas de Programación -- Práctica 1, Ejercicio 12}
 
 \setbeamertemplate{caption}{\raggedright\insertcaption\par}
 
 \begin{document}
 
+\newcommand{\code}[1]{\mintinline{haskell}{#1}}
+
 \begin{frame}
     \titlepage
 \end{frame}
+
+\section{Consigna}
+
+\begin{frame}[fragile]{Consigna}
+    Considerar el siguiente tipo, que representa a los árboles binarios:
+    \begin{minted}{haskell}
+        data AB a = Nil | Bin (AB a) a (AB a)
+    \end{minted}
+
+    \begin{enumerate}[I]
+        \item<2-> Usando recursión explícita, definir los esquemas de recursión estructural (\code{foldAB}) y primitiva (\code{recAB}), y dar sus tipos.
+        \item<3-> Definir las funciones \code{esNil}, \code{altura}, \code{cantNodos} (para \code{esNil} puede utilizarse \code{case} en lugar de \code{foldAB}).
+        \item<4-> Definir la función \code{mejorSegún :: (a -> a -> Bool) -> AB a -> a} para árboles. Se recomienda definir una función auxiliar para comparar la raíz con un posible resultado de la recursión para un árbol que puede o no ser \code{Nil}.
+        \item<5-> Definir la función \code{esABB :: Ord a => AB a -> Bool} que cheaquea si un árbol es un árbol binario de búsqueda. Recordar que, en un árbol binario de búsqueda, el valor de un nodo es mayor o igual que los valores que aparecen en el subárbol izquierdo y es estrictamente menor que los valores que aparecen en el subárbol derecho.
+        \item<6-> Justificar la elección de los esquemas de recursión utilizados para los tres puntos anteriores.
+    \end{enumerate}
+
+\end{frame}
+
+\section{Parte I}
+
+\section{Parte II}
+
+\section{Parte III}
+
+\section{Parte IV}
+
+\section{Parte V}
 
 \end{document}
