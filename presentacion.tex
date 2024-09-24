@@ -37,6 +37,55 @@
 
 \section{Parte I}
 
+\begin{frame}{Recursión Estructural -- \texttt{foldAB}}
+    \begin{block}{Tip}
+        Antes de definir cualquier función, \alert{dar su tipo}.
+    \end{block}
+
+    \pause
+
+    El tipo de la función de recursión estructural \code{foldT} para cualquier \code{T} se puede definir ``automáticamente'' en base a la definición de \code{T}:
+    
+    \pause
+
+    \begin{itemize}[<+->]
+        \item \code{foldT} devuelve un valor de tipo \code{r} y recibe una función \code{f} por cada constructor.
+        \item Las funciones reciben los mismos argumentos que los constructores correspondientes, excepto por los \textbf{argumentos recursivos} (los de tipo \code{T}): éstos se reemplazan por resultados de la recursión (de tipo \code{r}).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Recursión Estructural -- \texttt{foldAB} (Cont.)}
+    Repasamos la definición de \code{AB}:
+
+    \begin{minted}{haskell}
+        data AB a =
+            | Bin (AB a) a (AB a)
+            | Nil
+    \end{minted}
+
+    \pause
+
+    El método anterior nos dice que el tipo de \code{foldAB} debe ser:
+    
+    \begin{minted}[escapeinside=||]{haskell}
+        foldAB ::|\pause|
+            (r -> a -> r -> r) -> -- Caso Bin (AB a) a (AB a)|\pause|
+            r ->                  -- Caso Nil|\pause|
+            r                     -- Resultado
+    \end{minted}
+
+    \pause
+
+    La definición de la función se desprende casi directamente:
+    \begin{minted}[escapeinside=||]{haskell}
+        foldAB :: (r -> a -> r -> r) -> r -> r|\pause|
+        foldAB f z Nil = z|\pause|
+        foldAB f z (Bin izq val der) = f (rec izq) val (rec der)|\pause|
+            where rec ab = foldAB f z ab
+        
+    \end{minted}
+\end{frame}
+
 \section{Parte II}
 
 \section{Parte III}
