@@ -1,12 +1,12 @@
 \section{Parte II}
 
-\begin{frame}[fragile]{Definición de \texttt{esNil}}
+\begin{frame}{Parte II -- Consigna}
     \begin{exampleblock}{Parte II}
         Definir las funciones \code{esNil}, \code{altura}, \code{cantNodos} (para \code{esNil} puede utilizarse \code{case} en lugar de \code{foldAB}).
     \end{exampleblock}
+\end{frame}
 
-    \pause
-
+\begin{frame}[fragile]{Definición de \texttt{esNil}}
     Definición de \code{esNil}:
 
     \pause
@@ -26,7 +26,7 @@
         esNil = foldAB f z|\pause|
             where
                 z = True|\pause|
-                f _ _ _ = False|\pause|
+                f _ _ _ = False
     \end{minted}
 \end{frame}
 
