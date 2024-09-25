@@ -1,6 +1,12 @@
 \section{Parte I}
 
 \begin{frame}{Recursión Estructural -- \texttt{foldAB}}
+    \begin{exampleblock}{Parte I}
+        Usando recursión explícita, definir los esquemas de recursión estructural (\code{foldAB}) y primitiva (\code{recAB}), y dar sus tipos.
+    \end{exampleblock}
+
+    \pause
+
     \begin{block}{Tip}
         Antes de definir cualquier función, \alert{dar su tipo}.
     \end{block}
@@ -34,6 +40,7 @@
         foldAB ::|\pause|
             (r -> a -> r -> r) -> -- Caso Bin (AB a) a (AB a)|\pause|
             r ->                  -- Caso Nil|\pause|
+            AB a ->               -- Entrada|\pause|
             r                     -- Resultado
     \end{minted}
 
@@ -41,10 +48,26 @@
 
     La definición de la función se desprende casi directamente:
     \begin{minted}[escapeinside=||]{haskell}
-        foldAB :: (r -> a -> r -> r) -> r -> r|\pause|
+        foldAB :: (r -> a -> r -> r) -> r -> AB a -> r|\pause|
         foldAB f z Nil = z|\pause|
         foldAB f z (Bin izq val der) = f (rec izq) val (rec der)|\pause|
             where rec ab = foldAB f z ab
-        
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Recursión Primitiva -- \texttt{recAB}}
+    El esquema de \textbf{recursión primitiva} se puede armar a partir del de \textbf{recursión estructural}: en las funciones que reciben \textbf{resultados recursivos}, se agrega también el argumento recursivo del que viene el resultado.
+
+    \pause
+
+    Definamos entonces \code{recAB}:
+
+    \pause
+    
+    \begin{minted}[fontsize=\small,escapeinside=||]{haskell}
+        recAB :: (|\textcolor{red}{\textbf{AB} a}| -> r -> a -> |\textcolor{red}{\textbf{AB} a}| -> r -> r) -> r -> AB a -> r|\pause|
+        recAB f z Nil = z|\pause|
+        recAB f z (Bin izq val der) = f izq (rec izq) val der (rec der)|\pause|
+            where rec ab = recAB f z ab
     \end{minted}
 \end{frame}
