@@ -1,1 +1,36 @@
 \section{Parte III}
+
+\begin{frame}{Parte III -- Consigna}
+    \begin{exampleblock}{Parte III}
+        Definir la función \code{mejorSegún :: (a -> a -> Bool) -> AB a -> a} para árboles. Se recomienda definir una función auxiliar para comparar la raíz con un posible resultado de la recursión para un árbol que puede o no ser \code{Nil}.
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Función Auxiliar}
+    Primedro, implementamos la función auxiliar que indica la consigna, que compara la raíz con un posible resultado de la recursión. Para modelar un ``posible resultado'', usamos el tipo \code{Maybe}:
+
+    \pause
+
+    \begin{minted}[escapeinside=\#\#]{haskell}
+        maxSegunM :: (a -> a -> Bool) -> a -> Maybe a -> a#\pause#
+        maxSegunM cmp x Nothing = x#\pause#
+        maxSegunM cmp x (Just y)#\pause#
+            | x `cmp` y = x
+            | otherwise = y
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Definición de \texttt{mejorSegun}}
+    Ahora podemos definir \code{mejorSegun}. La función será \alert{parcial}, ya que no tenemos forma de producir un valor de tipo \code{a} cuando la entrada es \code{Nil}.
+
+    \pause
+
+    \begin{minted}[fontsize=\small,escapeinside=||]{haskell}
+        mejorSegun :: (a -> a -> Bool) -> AB a -> a|\pause|
+        mejorSegun cmp ab = fromJust $ foldAB maxSegun3 Nothing ab|\pause|
+            where
+                maxSegun3 :: Maybe a -> a -> Maybe a -> Maybe a|\pause|
+                maxSegun3 mIzq raiz mDer =
+                    Just $ maxSegunM (maxSegunM raiz mIzq) mDer
+    \end{minted}
+\end{frame}
