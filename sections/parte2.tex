@@ -1,1 +1,58 @@
 \section{Parte II}
+
+\begin{frame}[fragile]{Definición de \texttt{esNil}}
+    \begin{exampleblock}{Parte II}
+        Definir las funciones \code{esNil}, \code{altura}, \code{cantNodos} (para \code{esNil} puede utilizarse \code{case} en lugar de \code{foldAB}).
+    \end{exampleblock}
+
+    \pause
+
+    Definición de \code{esNil}:
+
+    \pause
+
+    \begin{minted}[escapeinside=||]{haskell}
+        esNil :: (AB a) -> Bool|\pause|
+        esNil ab = case ab of|\pause|
+            Nil       -> True|\pause|
+            Bin _ _ _ -> False
+    \end{minted}
+
+    \pause
+
+    Definición alternativa usando \code{foldAB}:
+    \begin{minted}[escapeinside=||]{haskell}
+        esNil :: (AB a) -> Bool|\pause|
+        esNil = foldAB f z|\pause|
+            where
+                z = True|\pause|
+                f _ _ _ = False|\pause|
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Definición de \texttt{altura}}
+    La \textbf{altura} de un árbol es la longitud de la rama más larga.
+
+    \pause
+
+    Definición de \code{altura}:
+
+    \begin{minted}[escapeinside=||]{haskell}
+        altura :: (AB a) -> Int|\pause|
+        altura = foldAB f z|\pause|
+            where
+                z = 0|\pause|
+                f rIzq _ rDer = 1 + max rIzq rDer
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Definición de \texttt{cantNodos}}
+    Definición de \code{cantNodos}:
+
+    \pause
+
+    \begin{minted}[escapeinside=||]{haskell}
+        cantNodos :: (AB a) -> Int|\pause|
+        cantNodos = foldAB|\pause| (\rIzq _ rDer -> 1 + rIzq + rDer)|\pause| 0
+    \end{minted}
+\end{frame}
