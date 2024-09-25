@@ -13,12 +13,12 @@
 
     \pause
 
-    El tipo de la función de recursión estructural \code{foldT} para cualquier \code{T} se puede definir ``automáticamente'' en base a la definición de \code{T}:
+    El tipo de la función de recursión estructural \code{foldT} para cualquier \code{T} se puede deducir ``automáticamente'' en base a la definición de \code{T}:
     
     \pause
 
     \begin{itemize}[<+->]
-        \item \code{foldT} devuelve un valor de tipo \code{r} y recibe una función \code{f} por cada constructor.
+        \item \code{foldT} devuelve un valor de tipo \code{r} y recibe una entrada de tipo \code{T} y una función por cada constructor de \code{T}.
         \item Las funciones reciben los mismos argumentos que los constructores correspondientes, excepto por los \textbf{argumentos recursivos} (los de tipo \code{T}): éstos se reemplazan por resultados de la recursión (de tipo \code{r}).
     \end{itemize}
 \end{frame}
