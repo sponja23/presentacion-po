@@ -35,12 +35,12 @@
     \pause
 
     El método anterior nos dice que el tipo de \code{foldAB} debe ser:
-    
+
     \begin{minted}[escapeinside=||]{haskell}
-        foldAB ::|\pause|
-            (r -> a -> r -> r) -> -- Caso Bin (AB a) a (AB a)|\pause|
-            r ->                  -- Caso Nil|\pause|
-            AB a ->               -- Entrada|\pause|
+        foldAB ::
+            (r -> a -> r -> r) -> -- Caso Bin (AB a) a (AB a)
+            r ->                  -- Caso Nil
+            AB a ->               -- Entrada
             r                     -- Resultado
     \end{minted}
 
