@@ -23,14 +23,48 @@
 \begin{frame}[fragile]{Definición de \texttt{mejorSegun}}
     Ahora podemos definir \code{mejorSegun}. La función será \alert{parcial}, ya que no tenemos forma de producir un valor de tipo \code{a} cuando la entrada es \code{Nil}.
 
+    \vspace{10pt}
+
     \pause
 
-    \begin{minted}[fontsize=\small,escapeinside=||]{haskell}
-        mejorSegun :: (a -> a -> Bool) -> AB a -> a|\pause|
-        mejorSegun cmp ab = fromJust $ foldAB maxSegun3 Nothing ab|\pause|
-            where
-                maxSegun3 :: Maybe a -> a -> Maybe a -> Maybe a|\pause|
-                maxSegun3 mIzq raiz mDer =
-                    Just $ maxSegunM (maxSegunM raiz mIzq) mDer
-    \end{minted}
+    \begin{overprint}
+        \onslide<2>
+        \begin{minted}{haskell}
+            mejorSegun :: (a -> a -> Bool) -> AB a -> a
+            mejorSegun cmp = foldAB maxSegun3 Nothing
+                where
+                    max' = maxSegunM cmp
+                    maxSegun3 mIzq raiz mDer =
+                        max' (max' raiz mIzq) mDer
+        \end{minted}
+
+        \pause
+
+        \onslide<3>
+        \begin{minted}{haskell}
+            mejorSegun :: (a -> a -> Bool) -> AB a -> a
+            mejorSegun cmp = foldAB maxSegun3 Nothing
+                where
+                    max' = maxSegunM cmp
+                    maxSegun3 mIzq raiz mDer =
+                        max' (max' raiz mIzq) mDer
+        \end{minted}
+
+        \pause
+
+        \onslide<4>
+        \begin{minted}{haskell}
+            mejorSegun :: (a -> a -> Bool) -> AB a -> a
+            mejorSegun cmp ab =
+                fromJust $ foldAB maxSegun3 Nothing ab
+                where
+                    max' = maxSegunM cmp
+                    maxSegun3 :: Maybe a -> a -> Maybe a -> Maybe a
+                    maxSegun3 mIzq raiz mDer =
+                        Just $ max' (max' raiz mIzq) mDer
+        \end{minted}
+    \end{overprint}
+    
+    \invisible<1,2,4>{\centering \color{red} \textbf{No tipa!}}
+
 \end{frame}

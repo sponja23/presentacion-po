@@ -36,21 +36,47 @@
 
     El método anterior nos dice que el tipo de \code{foldAB} debe ser:
 
-    \begin{minted}[escapeinside=||]{haskell}
-        foldAB ::
-            (r -> a -> r -> r) -> -- Caso Bin (AB a) a (AB a)
-            r ->                  -- Caso Nil
-            AB a ->               -- Entrada
-            r                     -- Resultado
-    \end{minted}
+    \begin{overprint}
+        \onslide<2>
+        \begin{minted}[escapeinside=||]{haskell}
+            foldAB ::
+                ? ->                  -- Caso Bin (AB a) a (AB a)
+                ? ->                  -- Caso Nil
+                AB a ->               -- Entrada
+                r                     -- Resultado
+        \end{minted}
+        
+        \pause
+
+        \onslide<3>
+        \begin{minted}[escapeinside=||]{haskell}
+            foldAB ::
+                ? ->                  -- Caso Bin (AB a) a (AB a)
+                r ->                  -- Caso Nil
+                AB a ->               -- Entrada
+                r                     -- Resultado
+        \end{minted}
+
+        \pause
+
+        \onslide<4->
+        \begin{minted}[escapeinside=||]{haskell}
+            foldAB ::
+                (r -> a -> r -> r) -> -- Caso Bin (AB a) a (AB a)
+                r ->                  -- Caso Nil
+                AB a ->               -- Entrada
+                r                     -- Resultado
+        \end{minted}
+
+    \end{overprint}
 
     \pause
 
     La definición de la función se desprende casi directamente:
     \begin{minted}[escapeinside=||]{haskell}
         foldAB :: (r -> a -> r -> r) -> r -> AB a -> r|\pause|
-        foldAB f z Nil = z|\pause|
-        foldAB f z (Bin izq val der) = f (rec izq) val (rec der)|\pause|
+        foldAB f z Nil =|\pause| z|\pause|
+        foldAB f z (Bin izq val der) =|\pause| f (rec izq) val (rec der)
             where rec ab = foldAB f z ab
     \end{minted}
 \end{frame}
@@ -66,8 +92,8 @@
     
     \begin{minted}[fontsize=\small,escapeinside=||]{haskell}
         recAB :: (|\textcolor{red}{\textbf{AB} a}| -> r -> a -> |\textcolor{red}{\textbf{AB} a}| -> r -> r) -> r -> AB a -> r|\pause|
-        recAB f z Nil = z|\pause|
-        recAB f z (Bin izq val der) = f izq (rec izq) val der (rec der)|\pause|
+        recAB f z Nil =|\pause| z|\pause|
+        recAB f z (Bin izq val der) =|\pause| f izq (rec izq) val der (rec der)
             where rec ab = recAB f z ab
     \end{minted}
 \end{frame}
